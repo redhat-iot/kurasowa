@@ -3,7 +3,7 @@ release:
   github:
     owner: redhat-iot
     name: kurasowa
-  draft: true
+  draft: false
 build:
   binary: kurasowa
   main: .
