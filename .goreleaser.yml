@@ -65,7 +65,7 @@ brew:
 
   commit_author:
     name: ccustine
-    email: ccustine@redhat.com
+    email: ccustine@apache.org
 
   # Folder inside the repository to put the formula.
   # Default is the root folder.
