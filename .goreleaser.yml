@@ -47,7 +47,7 @@ archive:
       format: zip
   files:
     - LICENSE
-    - CHANGELOG.md
+#    - CHANGELOG.md
 snapshot:
   name_template: SNAPSHOT-{{ .Commit }}
 checksum:
