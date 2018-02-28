@@ -7,7 +7,7 @@ release:
 build:
   binary: kurasowa
   main: .
-  ldflags: -s -w -X github.com/redhat-iot/kurasowa/kurasowa.timestamp={{.Date}} -X github.com/redhat-iot/kurasowa/kurasowa.commitHash={{.Commit}} -X github.com/redhat-iot/kurasowa/kurasowa.gitTag={{.Version}}
+  ldflags: -s -w -X github.com/redhat-iot/kurasowa/main.timestamp={{.Date}} -X github.com/redhat-iot/kurasowa/main.commitHash={{.Commit}} -X github.com/redhat-iot/kurasowa/main.gitTag={{.Version}}
   goos:
     - darwin
     - linux
