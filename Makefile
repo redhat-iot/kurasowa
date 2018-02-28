@@ -1,4 +1,4 @@
-appname := kura-sowa
+appname := kurasowa
 
 sources := $(wildcard *.go)
 

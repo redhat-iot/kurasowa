@@ -1,3 +1,19 @@
+/*
+Copyright 2018 Red Hat Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 package main
 
 import (
@@ -16,7 +32,13 @@ import (
 	"time"
 
 	MQTT "github.com/eclipse/paho.mqtt.golang"
-	kpb "github.com/ccustine/kura-sowa/kuradatatypes"
+	kpb "github.com/redhat-iot/kurasowa/kuradatatypes"
+)
+
+var (
+	commitHash string
+	timestamp  string
+	gitTag     = "v2"
 )
 
 func getPayload(payloadBytes []byte) ([]byte, error) {
@@ -55,6 +77,7 @@ func onMessageReceived(client MQTT.Client, message MQTT.Message) {
 		return
 	}
 
+	// TODO: Reference for output to JSON
 	//marshaler := &jsonpb.Marshaler{}
 	//jsonString, _ := marshaler.MarshalToString(kuraPayload)
 
@@ -67,13 +90,10 @@ func onMessageReceived(client MQTT.Client, message MQTT.Message) {
 		switch metric.GetType() {
 		case kpb.KuraPayload_KuraMetric_INT32:
 			fields[metric.GetName()] = metric.GetIntValue()
-			//ctxLogger.Infof("\t%s (%s): %v", metric.GetName(), metric.GetType(), metric.GetIntValue())
 		case kpb.KuraPayload_KuraMetric_INT64:
 			fields[metric.GetName()] = metric.GetLongValue()
-			//ctxLogger.Infof("\t%s (%s): %v", metric.GetName(), metric.GetType(), metric.GetLongValue())
 		case kpb.KuraPayload_KuraMetric_BOOL:
 			fields[metric.GetName()] = metric.GetBoolValue()
-			//ctxLogger.Infof("\t%s (%s): %v", metric.GetName(), metric.GetType(), metric.GetBoolValue())
 		case kpb.KuraPayload_KuraMetric_DOUBLE:
 			fields[metric.GetName()] = metric.GetDoubleValue()
 			/*
@@ -81,18 +101,13 @@ func onMessageReceived(client MQTT.Client, message MQTT.Message) {
 				fields["metric_timestamp"] = time.Unix(0, int64(time.Millisecond) * int64(metric.GetDoubleValue()))
 			}
 			*/
-			//ctxLogger.Infof("\t%s (%s): %v", metric.GetName(), metric.GetType(), metric.GetDoubleValue())
 		case kpb.KuraPayload_KuraMetric_FLOAT:
 			fields[metric.GetName()] = metric.GetFloatValue()
-			//ctxLogger.Infof("\t%s (%s): %v", metric.GetName(), metric.GetType(), metric.GetFloatValue())
 		case kpb.KuraPayload_KuraMetric_BYTES:
 			fields[metric.GetName()] = metric.GetBytesValue()
-			//ctxLogger.Infof("\t%s (%s): %v", metric.GetName(), metric.GetType(), metric.GetBoolValue())
 		case kpb.KuraPayload_KuraMetric_STRING:
 			fields[metric.GetName()] = metric.GetStringValue()
-			//ctxLogger.Infof("\t%s (%s): %s", metric.GetName(), metric.GetType(), metric.GetStringValue())
 		default:
-			//ctxLogger.Infof("\t%s (%s): %v", metric.GetName(), metric.GetType(), metric.GetStringValue())
 		}
 	}
 	fields["payload_timestamp"] = time.Unix(0, kuraPayload.GetTimestamp() * int64(time.Millisecond))
@@ -101,12 +116,9 @@ func onMessageReceived(client MQTT.Client, message MQTT.Message) {
 
 }
 
-var i int
-
 func main() {
 	//MQTT.DEBUG = log.New(os.Stdout, "", 0)
 	//MQTT.ERROR = log.New(os.Stdout, "", 0)
-	i = 0
 
 	hostname, _ := os.Hostname()
 
