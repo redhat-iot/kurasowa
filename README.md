@@ -19,9 +19,12 @@ move kurasowa.exe to a suitable location in your path.
 
 ## Usage
 ```
-$ kurasowa -username <user> -password <password> -server 'tcp://<mqttBroker>:1883' -topic '<Account>/<Device>/<App>/<Topic>'
+$ kurasowa -username <user> -password <password> -server 'tcp://<mqttBroker>:1883' \
+    -topic '<Account>/<Device>/<App>/<Topic>'
 ```
 For example, to connect to the running Industry 4.0 demo instance:
 ```
-$ kurasowa -username 'demo' -password 'DemoUser123!@#' -server 'tcp://broker-redhat-iot.apps.iiot-demo.rhiot.org:31883' -topic 'Red-Hat/+/cloudera-demo/#'
+$ kurasowa -username 'demo' -password 'DemoUser123!@#' \
+    -server 'tcp://broker-redhat-iot.apps.iiot-demo.rhiot.org:31883' \
+    -topic 'Red-Hat/+/cloudera-demo/#'
 ```
