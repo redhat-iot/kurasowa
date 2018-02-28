@@ -7,7 +7,7 @@ release:
 build:
   binary: kurasowa
   main: .
-  ldflags: -s -w -X github.com/redhat-iot/kurasowa/main.timestamp={{.Date}} -X github.com/redhat-iot/kurasowa/main.commitHash={{.Commit}} -X github.com/redhat-iot/kurasowa/main.gitTag={{.Version}}
+  ldflags: -s -w -X main.timestamp={{.Date}} -X main.commitHash={{.Commit}} -X main.gitTag={{.Version}}
   goos:
     - darwin
     - linux
@@ -49,7 +49,7 @@ archive:
     - LICENSE
 #    - CHANGELOG.md
 snapshot:
-  name_template: SNAPSHOT-{{ .Commit }}
+  name_template: SNAPSHOT #-{{ .Commit }}
 checksum:
   name_template: '{{ .ProjectName }}_{{ .Version }}_checksums.txt'
 

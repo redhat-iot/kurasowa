@@ -40,7 +40,7 @@ import (
 var (
 	commitHash string
 	timestamp  string
-	gitTag     = "v2"
+	gitTag     = "SNAPSHOT"
 )
 
 func getPayload(payloadBytes []byte) ([]byte, error) {
