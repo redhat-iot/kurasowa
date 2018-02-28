@@ -52,3 +52,60 @@ snapshot:
   name_template: SNAPSHOT-{{ .Commit }}
 checksum:
   name_template: '{{ .ProjectName }}_{{ .Version }}_checksums.txt'
+
+brew:
+  # Repository to push the tap to.
+  github:
+    owner: redhat-iot
+    name: homebrew-tap
+
+  # Allows you to set a custom download strategy.
+  # Default is empty.
+#  download_strategy: GitHubPrivateRepositoryReleaseDownloadStrategy
+
+  commit_author:
+    name: ccustine
+    email: ccustine@redhat.com
+
+  # Folder inside the repository to put the formula.
+  # Default is the root folder.
+  folder: Formula
+
+  # Caveats for the user of your binary.
+  # Default is empty.
+#  caveats: "How to use this binary"
+
+  homepage: "https://github.com/redhat-iot/kurasowa/"
+  description: "Command line utility for reading KuraPayload messages"
+
+  # Setting this will prevent goreleaser to actually try to commit the updated
+  # formula - instead, the formula file will be stored on the dist folder only,
+  # leaving the responsibility of publishing it to the user.
+  # Default is false.
+#  skip_upload: true
+
+  # Packages your package depends on.
+#  dependencies:
+#    - git
+#    - zsh
+
+  # Packages that conflict with your package.
+#  conflicts:
+#    - svn
+#    - bash
+
+  # Specify for packages that run as a service.
+  # Default is empty.
+#  plist: |
+#    <?xml version="1.0" encoding="UTF-8"?>
+#    ...
+
+  # So you can `brew test` your formula.
+  # Default is empty.
+  test: |
+    system "#{bin}/kurasowa --help"
+
+  # Custom install script for brew.
+  # Default is 'bin.install "program"'.
+#  install: |
+#    bin.install "program"
