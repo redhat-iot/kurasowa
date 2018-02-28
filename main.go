@@ -21,6 +21,8 @@ import (
 	"compress/gzip"
 	"crypto/tls"
 	"flag"
+	"fmt"
+
 	//"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	log "github.com/sirupsen/logrus"
@@ -117,6 +119,11 @@ func onMessageReceived(client MQTT.Client, message MQTT.Message) {
 }
 
 func main() {
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Kurasowa %s : Build Time %s : Commit %s\n", gitTag, timestamp, commitHash )
+		flag.PrintDefaults()
+	}
+
 	//MQTT.DEBUG = log.New(os.Stdout, "", 0)
 	//MQTT.ERROR = log.New(os.Stdout, "", 0)
 
